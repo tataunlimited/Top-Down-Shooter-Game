@@ -20,9 +20,10 @@ namespace GameCore.Gun
 
         public void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent<IDamageable>(out var damageable)) return;
-            damageable.ReceiveDamage(Data.Damage);
+            if (other.TryGetComponent<IDamageable>(out var damageable)) 
+                damageable.ReceiveDamage(Data.Damage);
             Destroy(gameObject);
+            
         }
     }
 

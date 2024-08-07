@@ -1,10 +1,13 @@
+using System;
 using Data;
 using GameCore.Entity.Components;
 using GameCore.FSM;
+using Services;
 using UnityEngine;
 
 namespace GameCore.Entity
 {
+    
     public class BaseEntity : MonoBehaviour, IDamageable
     {
         [SerializeField] private EntityData data;
@@ -20,12 +23,35 @@ namespace GameCore.Entity
         private MovementComponent _movementComponent;
         private InputComponent _inputComponent;
         private BaseStateMachine _stateMachine;
+        private GameManager _gameManager;
 
         private void Awake()
         {
-            Initialize();
+            Initialize(); 
+            _gameManager = GameManager.Instance;
+            AddListeners();
         }
 
+        private void OnDestroy()
+        {
+            RemoveListeners();
+        }
+
+        private void AddListeners()
+        {
+            _healthComponent.OnDeath += OnDeath;
+        }
+
+        private void OnDeath()
+        { 
+            _gameManager.GameOver(this is EnemyEntity);
+        }
+
+        private void RemoveListeners()
+        {
+            _healthComponent.OnDeath -= OnDeath;
+        }
+        
         private void Update()
         {
             _inputComponent.UpdateInput();
@@ -39,7 +65,7 @@ namespace GameCore.Entity
             _stateMachine.Idle();
         }
 
-        private void CacheComponents()
+        protected virtual void CacheComponents()
         {
             CacheComponent(ref _healthComponent);
             CacheComponent(ref _attackComponent);
@@ -48,7 +74,7 @@ namespace GameCore.Entity
             CacheComponent(ref _stateMachine);
         }
 
-        private void CacheComponent<T>(ref T component)
+        protected void CacheComponent<T>(ref T component)
         {
             component = GetComponent<T>() ?? GetComponentInChildren<T>();
             if (component is IEntityComponent entityComponent)

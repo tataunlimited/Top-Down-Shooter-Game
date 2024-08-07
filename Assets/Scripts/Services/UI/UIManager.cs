@@ -1,18 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+namespace Services.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UIManager : MonoBehaviour
     {
+        [SerializeField] private List<BaseUIModel> uiModels;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            foreach (var uiModel in uiModels)
+            {
+                uiModel.Hide();
+            }
+        }
+    
+        public void ShowGameOverScreen(bool isWinner)
+        {
+            foreach (var uiModel in uiModels)
+            {
+                if (uiModel is GameOverScreen.GameOverScreenModel gameOverUIModel)
+                {
+                    gameOverUIModel.Init(isWinner);
+                    gameOverUIModel.Show();
+                }
+            }
+        }
     }
 }
