@@ -1,10 +1,10 @@
-using Entity;
+using GameCore.Entity;
 
-namespace FSM.States
+namespace GameCore.FSM.States
 {
-    public class Idle : BaseState
+    public class Death : BaseState
     {
-        public Idle(BaseEntity handler, BaseStateMachine baseStateMachine) : base(handler, baseStateMachine)
+        public Death(BaseEntity handler, BaseStateMachine baseStateMachine) : base(handler, baseStateMachine)
         {
         }
 

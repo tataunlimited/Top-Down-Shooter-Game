@@ -1,6 +1,6 @@
-using Entity;
+using GameCore.Entity;
 
-namespace FSM.States
+namespace GameCore.FSM.States
 {
     public class Attack : BaseState
     {

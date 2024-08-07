@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd5b105b19134cc5b14b770b77559eb, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  Name: 
-  Health: 0
-  Damage: 0
+  Name: John
+  Health: 100
+  Damage: 5
+  Speed: 10
+  Gun:
+    BulletData:
+      Damage: 10
+      Speed: 20
+      Range: 20
+    FireRate: 1

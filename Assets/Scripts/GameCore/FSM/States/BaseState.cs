@@ -1,7 +1,7 @@
-using Entity;
-using Entity.Components;
+using GameCore.Entity;
+using GameCore.Entity.Components;
 
-namespace FSM.States
+namespace GameCore.FSM.States
 {
     public abstract class BaseState
     {

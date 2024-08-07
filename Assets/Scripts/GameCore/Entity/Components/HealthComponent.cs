@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Entity.Components
+namespace GameCore.Entity.Components
 {
     public class HealthComponent: MonoBehaviour, IEntityComponent
     {

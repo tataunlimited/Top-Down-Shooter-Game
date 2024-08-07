@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Entity.Components
+namespace GameCore.Entity.Components
 {
     public class PlayerInputComponent : InputComponent
     {
         private Vector3 _movement = Vector3.zero;
         private bool _shouldShoot;
-        public override void ProcessInput()
+        public override void UpdateInput()
         {
             _movement.x = Input.GetAxisRaw("Horizontal");
             _movement.z = Input.GetAxisRaw("Vertical");

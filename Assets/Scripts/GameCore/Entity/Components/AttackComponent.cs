@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Entity.Components
+namespace GameCore.Entity.Components
 {
     public class AttackComponent: MonoBehaviour, IEntityComponent
     {

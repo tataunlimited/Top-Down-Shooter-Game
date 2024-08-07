@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Gun;
+using GameCore.Gun;
 using UnityEngine;
 
 namespace Data

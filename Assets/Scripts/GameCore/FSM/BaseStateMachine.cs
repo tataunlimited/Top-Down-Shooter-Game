@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Entity;
-using FSM.States;
+using GameCore.Entity;
+using GameCore.FSM.States;
 using UnityEngine;
 
-namespace FSM
+namespace GameCore.FSM
 {
     public class BaseStateMachine : MonoBehaviour
     {
@@ -15,19 +15,15 @@ namespace FSM
         private Run RunState { get; set; }
         private Death DeathState { get; set; }
         public bool IsInitialized { get; private set; }
-        private BaseState Current => (_currentStateEnum < 0) ? null : _register[_currentStateEnum];
+        private BaseState Current => _currentStateEnum == EnumState.None ? null : _register[_currentStateEnum];
 
-        private void Awake()
-        {
-            IsInitialized = false;
-            _currentStateEnum = EnumState.None;
-        }
 
         private void RegisterState(EnumState stateEnum, BaseState state)
         {
             if (state == null)
                 throw new ArgumentNullException(nameof(state));
 
+            Debug.Log("Register State" + stateEnum);
             _register.Add(stateEnum, state);
         }
 
@@ -39,10 +35,11 @@ namespace FSM
             if (_currentStateEnum != EnumState.None)
                 Current?.OnExit();
             _currentStateEnum = nextStateEnum;
+            Debug.Log("Push State" + nextStateEnum);
             Current?.OnEnter();
         }
 
-        public void Initialize(BaseEntity handler = null)
+        public void Initialize(BaseEntity handler)
         {
             IdleState = new Idle(handler, this);
             AttackState = new Attack(handler, this);
@@ -58,6 +55,7 @@ namespace FSM
 
         public void UpdateState()
         {
+            Debug.Log("Update State" + Current == null);
             Current?.OnUpdate();
         }
 

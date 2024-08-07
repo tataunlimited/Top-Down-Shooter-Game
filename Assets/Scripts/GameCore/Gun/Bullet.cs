@@ -1,8 +1,8 @@
 using System;
-using Entity;
+using GameCore.Entity;
 using UnityEngine;
 
-namespace Gun
+namespace GameCore.Gun
 {
     public class Bullet : MonoBehaviour
     {

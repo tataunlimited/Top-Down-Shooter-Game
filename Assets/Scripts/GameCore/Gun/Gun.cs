@@ -1,31 +1,32 @@
 using System;
 using UnityEngine;
 
-namespace Gun
+namespace GameCore.Gun
 {
     public class Gun : MonoBehaviour
     {
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private Bullet bulletPrefab;
+        public bool CanShoot { get; private set; }
+
         public GunData Data { get; set; }
 
         private float _coolDownRemaining;
-        private bool _canShoot;
 
         private void Update()
         {
             if (_coolDownRemaining <= 0)
-                _canShoot = true;
+                CanShoot = true;
             else
             {
-                _canShoot = false;
+                CanShoot = false;
                 _coolDownRemaining -= Time.deltaTime;
             }
         }
 
         public void Shoot()
         {
-            if(!_canShoot)
+            if(!CanShoot)
                 return;
             _coolDownRemaining = Data.FireRate;
             SpawnBullet();

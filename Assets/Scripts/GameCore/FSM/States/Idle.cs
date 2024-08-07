@@ -1,11 +1,11 @@
-using Entity;
+using GameCore.Entity;
+using UnityEngine;
 
-namespace FSM.States
+namespace GameCore.FSM.States
 {
-    public class Run : BaseState
+    public class Idle : BaseState
     {
-        public Run(BaseEntity handler, global::FSM.BaseStateMachine baseStateMachine) : base(handler,
-            baseStateMachine)
+        public Idle(BaseEntity handler, BaseStateMachine baseStateMachine) : base(handler, baseStateMachine)
         {
         }
 
@@ -24,11 +24,10 @@ namespace FSM.States
             else if (Actions.IsMoving)
             {
                 Handler.StateMachine.Run();
+                Debug.Log("IsMoving");
             }
-            else
-            {
-                Handler.StateMachine.Idle();
-            }
+            Debug.Log("IDLE UPDATE");
+
         }
     }
 }

@@ -1,10 +1,9 @@
-using System;
 using Data;
-using Entity.Components;
-using FSM;
+using GameCore.Entity.Components;
+using GameCore.FSM;
 using UnityEngine;
 
-namespace Entity
+namespace GameCore.Entity
 {
     public class BaseEntity : MonoBehaviour, IDamageable
     {
@@ -13,6 +12,7 @@ namespace Entity
         public InputComponent InputComponent => _inputComponent;
         public BaseStateMachine StateMachine => _stateMachine;
         public HealthComponent HealthComponent => _healthComponent;
+        public MovementComponent MoveComponent => _movementComponent;
 
         private HealthComponent _healthComponent;
         private AttackComponent _attackComponent;
@@ -20,19 +20,21 @@ namespace Entity
         private InputComponent _inputComponent;
         private BaseStateMachine _stateMachine;
 
-        private void Awake()
+        private void Start()
         {
             Initialize();
         }
+
         private void Update()
         {
-            _inputComponent.ProcessInput();
+            _inputComponent.UpdateInput();
             _stateMachine.UpdateState();
         }
+
         private void Initialize()
         {
             CacheComponents();
-            _stateMachine.Initialize();
+            _stateMachine.Initialize(this);
             _stateMachine.Idle();
         }
 
@@ -44,7 +46,7 @@ namespace Entity
             CacheComponent(ref _inputComponent);
             CacheComponent(ref _stateMachine);
         }
-        
+
         private void CacheComponent<T>(ref T component)
         {
             component = GetComponent<T>() ?? GetComponentInChildren<T>();
@@ -54,13 +56,11 @@ namespace Entity
             }
         }
 
-        
-
-
         public void ReceiveDamage(float damage)
         {
             _healthComponent.ChangeHealth(damage);
         }
+
         public void Shoot()
         {
             _attackComponent.Shoot();

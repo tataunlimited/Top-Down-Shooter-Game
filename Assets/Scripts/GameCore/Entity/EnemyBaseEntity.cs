@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Entity
+namespace GameCore.Entity
 {
     public class EnemyBaseEntity : BaseEntity
     {
