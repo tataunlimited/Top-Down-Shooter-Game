@@ -7,7 +7,7 @@ namespace GameCore.Gun
     public class Bullet : MonoBehaviour
     {
         public BulletData Data { get; set; }
-        
+
         private void Start()
         {
             Destroy(gameObject, Data.Range / Data.Speed);

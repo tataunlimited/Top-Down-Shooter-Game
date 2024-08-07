@@ -11,9 +11,7 @@ namespace Data
         public float Health;
         public float Damage;
         public float Speed;
-
-
-        public GunData Gun;
+        public BaseGun Gun;
 
 
     }

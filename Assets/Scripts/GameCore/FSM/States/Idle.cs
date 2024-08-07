@@ -19,14 +19,20 @@ namespace GameCore.FSM.States
 
         public override void OnUpdate()
         {
-            if(Handler.HealthComponent.IsDead)
+            if (Handler.HealthComponent.IsDead)
+            {
                 Handler.StateMachine.Death();
-            else if (Actions.IsMoving)
+                return;
+            }
+            if (Actions.IsMoving)
             {
                 Handler.StateMachine.Run();
-                Debug.Log("IsMoving");
             }
-            Debug.Log("IDLE UPDATE");
+
+            if (Actions.ShouldShoot)
+            {
+                Handler.AttackComponent.Shoot();
+            }
 
         }
     }

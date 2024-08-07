@@ -13,6 +13,7 @@ namespace GameCore.Entity
         public BaseStateMachine StateMachine => _stateMachine;
         public HealthComponent HealthComponent => _healthComponent;
         public MovementComponent MoveComponent => _movementComponent;
+        public AttackComponent AttackComponent => _attackComponent;
 
         private HealthComponent _healthComponent;
         private AttackComponent _attackComponent;
@@ -20,7 +21,7 @@ namespace GameCore.Entity
         private InputComponent _inputComponent;
         private BaseStateMachine _stateMachine;
 
-        private void Start()
+        private void Awake()
         {
             Initialize();
         }

@@ -23,7 +23,6 @@ namespace GameCore.FSM
             if (state == null)
                 throw new ArgumentNullException(nameof(state));
 
-            Debug.Log("Register State" + stateEnum);
             _register.Add(stateEnum, state);
         }
 
@@ -35,7 +34,6 @@ namespace GameCore.FSM
             if (_currentStateEnum != EnumState.None)
                 Current?.OnExit();
             _currentStateEnum = nextStateEnum;
-            Debug.Log("Push State" + nextStateEnum);
             Current?.OnEnter();
         }
 
@@ -55,7 +53,6 @@ namespace GameCore.FSM
 
         public void UpdateState()
         {
-            Debug.Log("Update State" + Current == null);
             Current?.OnUpdate();
         }
 

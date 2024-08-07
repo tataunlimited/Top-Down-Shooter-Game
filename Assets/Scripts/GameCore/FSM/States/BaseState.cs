@@ -28,15 +28,15 @@ namespace GameCore.FSM.States
         {
             
             private InputComponent _input;
-            private BaseEntity _baseEntity;
+            private BaseEntity _entity;
             
-            public EntityActions(BaseEntity baseEntity)
+            public EntityActions(BaseEntity entity)
             {
-                _baseEntity = baseEntity;
-                _input = baseEntity.InputComponent;
+                _entity = entity;
+                _input = entity.InputComponent;
             }
-            public bool ShouldShoot => _input is not null && _input.ShouldShoot();
-            public bool IsMoving => _input is not null && _input.GetMovementDirection().sqrMagnitude > 0;
+            public bool ShouldShoot => _entity.AttackComponent.CanShoot() && _input.ShouldShoot();
+            public bool IsMoving => _input.GetMovementDirection().sqrMagnitude > 0;
         }
     }
 }
