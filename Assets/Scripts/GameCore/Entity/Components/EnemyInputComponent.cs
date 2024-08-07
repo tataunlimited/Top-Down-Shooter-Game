@@ -8,10 +8,9 @@ namespace GameCore.Entity.Components
         public bool CanMove { get; set; }
         public Vector3 TargetPosition { get; set; }
         
-
         public override void UpdateInput()
         {
-            // Do nothing
+            // Do nothing for now
         }
 
         public override Vector3 GetMovementDirection()

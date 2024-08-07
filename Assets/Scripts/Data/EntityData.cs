@@ -9,7 +9,6 @@ namespace Data
     {
         public string Name;
         public float Health;
-        public float Damage;
         public float Speed;
         public BaseGun Gun;
 
