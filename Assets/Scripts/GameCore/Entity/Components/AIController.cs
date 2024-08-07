@@ -23,7 +23,13 @@ namespace GameCore.Entity.Components
             {
                 return;
             }
-            if (BaseEntity.HealthComponent.IsDead) return;
+
+            if (BaseEntity.HealthComponent.IsDead)
+            {
+                _inputComponent.CanShoot = false;
+                _inputComponent.CanMove = false;
+                return;
+            }
             
             _inputComponent.TargetPosition = _target.transform.position;
             if(TargetInAttackRange())

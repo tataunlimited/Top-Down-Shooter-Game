@@ -1,10 +1,12 @@
 using System;
+using Services.UI.EntityBars;
 using UnityEngine;
 
 namespace GameCore.Entity.Components
 {
     public class HealthComponent: MonoBehaviour, IEntityComponent
     {
+        [SerializeField] private EntityInfoUI entityInfoUI;
         public BaseEntity BaseEntity { get; set; }
         public float Health { get; private set; }
         public float MaxHealth { get; private set; }
@@ -15,11 +17,13 @@ namespace GameCore.Entity.Components
 
         public event Action OnDeath;
         public event Action<HealthComponent> OnHealthChanged;
+        
 
         public void Start()
         {
             MaxHealth = Health = BaseEntity.Data.Health;
-            OnHealthChanged?.Invoke(this);
+            entityInfoUI.Init(BaseEntity.Data.Name);
+
         }
         
         public void ChangeHealth(float damage)
@@ -30,6 +34,7 @@ namespace GameCore.Entity.Components
                 Health = 0;
                 Die();
             }
+            entityInfoUI.UpdateHealth(HealthPercentage);
             OnHealthChanged?.Invoke(this);
 
         }
